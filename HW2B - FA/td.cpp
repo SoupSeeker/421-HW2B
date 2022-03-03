@@ -85,19 +85,18 @@ bool accept(info dfa, string word)
     int currentState = dfa.startstate;              //dont alter the dfa objects starting state, just use a local variable
 
     for (auto ch : word) {                          //for each character in the word
-        if (currentState == -1) {                   //if our currentState is -1, there is no where we can get, lexical error
-            cout << "new state: " << currentState << endl;
-            return false;
-        }
+
         int col = ch - 'a';                           //convert to col using the ch - 'a' trick
         cout << "state: " << currentState << "  char: " << ch << endl;
-        
+
         if (TRS[currentState][col] >= 0) {               //if TRS[state][input] is not -1, we have a new state to go to
             cout << "new state: " << TRS[currentState][col] << endl;
             currentState = TRS[currentState][col];
         }
         else {
             currentState = TRS[currentState][col];
+            cout << "new state: " << currentState << endl;
+            return false;                                  //if our current state is -1, we have hit a character that does not belong and we can stop processing
         }
     }
 
