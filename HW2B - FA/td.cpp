@@ -137,5 +137,5 @@ int main()
         // ** if no DFA does, generate a lexical error message.
         cout << "do control-C or type 'exit' to quit" << endl;
     }
-
+    return 0;
 }//the end
